@@ -18,10 +18,6 @@ JeecgBoot - APP移动解决方案，采用uniapp框架，一份代码多终端�
 - https://github.com/jeecgboot/jeecg-uniapp
 - https://gitee.com/jeecg/jeecg-uniapp
 
-
-### 后台代码
--  https://github.com/jeecgboot/jeecg-boot
-
 ### 技术文档
 - APP体验：   http://jeecg.com/appIndex
 - 技术官网： [http://www.jeecg.com](http://www.jeecg.com)

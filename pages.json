@@ -160,7 +160,97 @@
 			"style": {}
 		}
 		
-	],
+	    ,{
+            "path" : "pages/generate/generate",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "脚本生成",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/scripts/scripts",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "拍摄脚本",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/modifyScript/modifyScript",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改脚本",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shot/shot",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "拍摄",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/video/video",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "查看视频",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/homepage/homepage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "主页",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/generateCopywriting/generateCopywriting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "AI文案",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/copywriting/copywriting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "查看文案",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/originalScript/originalScript",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "原创脚本",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/originalCopywriting/originalCopywriting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "原创文案",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */
@@ -168,7 +258,7 @@
 			"allowsBounceVertical": "NO"
 		},
 		"navigationBarBackgroundColor": "#0081ff",
-		"navigationBarTitleText": "JEECG BOOT",
+		
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "white"
 	},

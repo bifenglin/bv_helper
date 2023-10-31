@@ -119,6 +119,72 @@ const routes = [
 	    meta: {
 	        title: 'helloWorld',
 	    },
+	},{
+	    path: '/pages/generate/generate',
+	    name: 'generate',
+	    meta: {
+	        title: '脚本生成',
+	    },
+	},{
+	    path: '/pages/scripts/scripts',
+	    name: 'scripts',
+	    meta: {
+	        title: '拍摄脚本',
+	    },
+	},
+	{
+	    path: '/pages/modifyScript/modifyScript',
+	    name: 'modifyScript',
+	    meta: {
+	        title: '调整脚本',
+	    },
+	},
+	{
+	    path: '/pages/shot/shot',
+	    name: 'shot',
+	    meta: {
+	        title: '拍摄',
+	    },
+	},
+	{
+	    path: '/pages/video/video',
+	    name: 'video',
+	    meta: {
+	        title: '查看视频',
+	    },
+	},
+	{
+	    path: '/pages/homepage/homepage',
+	    name: 'homepage',
+	    meta: {
+	        title: '主页',
+	    },
+	},
+	{
+	    path: '/pages/generateCopywriting/generateCopywriting',
+	    name: 'generateCopywriting',
+	    meta: {
+	        title: 'AI文案',
+	    },
+	},{
+	    path: '/pages/copywriting/copywriting',
+	    name: 'copywriting',
+	    meta: {
+	        title: '查看文案',
+	    },
+	},{
+	    path: '/pages/originalScript/originalScript',
+	    name: 'originalScript',
+	    meta: {
+	        title: '原创脚本',
+	    },
+	},
+	{
+	    path: '/pages/originalCopywriting/originalCopywriting',
+	    name: 'originalCopywriting',
+	    meta: {
+	        title: '原创文案',
+	    },
 	},
 ]
 export default routes

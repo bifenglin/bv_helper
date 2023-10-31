@@ -2322,6 +2322,7 @@ button.cuIcon.lg {
 	align-items: center;
 	min-height: 100upx;
 	justify-content: space-between;
+	
 }
 
 .cu-form-group+.cu-form-group {

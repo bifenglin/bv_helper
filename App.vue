@@ -150,7 +150,8 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	@import "@/uni_modules/uview-ui/index.scss";
 	@import "plugin/colorui/main.css";
 	@import "plugin/colorui/icon.css";
     @import "plugin/colorui/animation.css";

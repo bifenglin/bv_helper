@@ -7,6 +7,7 @@ import configService from'./common/service/config.service.js'
 
 import router from './common/router'
 import {RouterMount} from './plugin/uni-simple-router/index.js'
+import uView from '@/uni_modules/uview-ui'
 
 //引入mescroll插件
 import MescrollBody from "@/components/mescroll-uni/mescroll-body.vue"
@@ -16,6 +17,7 @@ Vue.component('mescroll-uni', MescrollUni);
 
 // 注册缓存器
 Vue.use(MinCache,{timeout: 6})
+Vue.use(uView)
 
 // store
 Vue.prototype.$store=store;
@@ -35,6 +37,8 @@ Vue.component('home',home)
 import people from './pages/user/people.vue'
 Vue.component('people',people)
 
+import homepage from './pages/homepage/homepage.vue'
+Vue.component('homepage',homepage)
 // 自定义组件
 import mySelect from './components/my-componets/my-select.vue'
 Vue.component('mySelect',mySelect)
@@ -68,6 +72,7 @@ Vue.config.productionTip = false
 
 App.mpType = 'app'
 
+
 const app = new Vue({
 	store,
 	MinCache,
@@ -77,6 +82,7 @@ const app = new Vue({
 // #ifdef H5
 	RouterMount(app,'#app');
 // #endif
+
 
 // #ifndef H5
 	app.$mount(); //为了兼容小程序及app端必须这样写才有效果

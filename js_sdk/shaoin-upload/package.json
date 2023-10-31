@@ -1,0 +1,9 @@
+{
+    "id": "shaoin-upload",
+    "name": "图片、视频上传阿里oss",
+    "version": "1.0.1",
+    "description": "兼容上传小程序、app、H5 图片与视频上传，以及返回图片或视频保存地址。",
+    "keywords": [
+        "前端、小程序、app、H5"
+    ]
+}

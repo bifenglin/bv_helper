@@ -56,7 +56,7 @@
 			tapTop() {
 				uni.pageScrollTo({
 					scrollTop: 0,
-					duration: 500
+					duration: 50
 				});
 			}
 
@@ -77,12 +77,13 @@
 		font-family: wpfont;
 	}
 	.btn-plusempty {
+		z-index: 4;
 		width: 80upx;
 		height: 80upx;
 		background: #0fa3fa;
 		position: fixed;
-		bottom: 145upx;
-		left: 30upx;
+		bottom: 200upx;
+		right: 30upx;
 		border-radius: 100%;
 		overflow: hidden;
 		text-align: center;

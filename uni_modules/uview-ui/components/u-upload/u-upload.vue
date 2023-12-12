@@ -17,6 +17,7 @@
 							width: $u.addUnit(width),
 							height: $u.addUnit(height)
 						}]"
+						
 					/>
 					<view
 					    v-else
@@ -105,7 +106,8 @@
 				    :class="[disabled && 'u-upload__button--disabled']"
 					:style="[{
 						width: $u.addUnit(width),
-						height: $u.addUnit(height)
+						height: $u.addUnit(height),
+						backgroundColor:uploadBackgroundColor
 					}]"
 				>
 					<u-icon

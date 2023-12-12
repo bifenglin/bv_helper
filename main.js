@@ -36,9 +36,16 @@ Vue.component('home',home)
 
 import people from './pages/user/people.vue'
 Vue.component('people',people)
-
+import userlogin from './pages/user/user1.vue'
+Vue.component('userlogin',userlogin)
 import homepage from './pages/homepage/homepage.vue'
 Vue.component('homepage',homepage)
+import firstpage from './pages/firstpage/firstpage.vue'
+Vue.component('firstpage',firstpage)
+import user from './pages/user/new_user.vue'
+Vue.component('user',user)
+import works from './pages/works/works.vue'
+Vue.component('works',works)
 // 自定义组件
 import mySelect from './components/my-componets/my-select.vue'
 Vue.component('mySelect',mySelect)

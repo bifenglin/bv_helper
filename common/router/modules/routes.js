@@ -30,6 +30,7 @@ const routes = [
 	        title: '个人中心',
 	    },
 	},
+
 	{
 	    path: '/pages/user/userdetail',
 	    name: 'userdetail',
@@ -120,16 +121,16 @@ const routes = [
 	        title: 'helloWorld',
 	    },
 	},{
-	    path: '/pages/generate/generate',
+	    path: '/subPagesB/generate/generate',
 	    name: 'generate',
 	    meta: {
-	        title: '脚本生成',
+	        title: 'AI脚本',
 	    },
 	},{
-	    path: '/pages/scripts/scripts',
+	    path: '/subPagesB/scripts/scripts',
 	    name: 'scripts',
 	    meta: {
-	        title: '拍摄脚本',
+	        title: '确认脚本',
 	    },
 	},
 	{
@@ -140,14 +141,14 @@ const routes = [
 	    },
 	},
 	{
-	    path: '/pages/shot/shot',
+	    path: '/subPages/shot/shot',
 	    name: 'shot',
 	    meta: {
 	        title: '拍摄',
 	    },
 	},
 	{
-	    path: '/pages/video/video',
+	    path: '/subPages/video/video',
 	    name: 'video',
 	    meta: {
 	        title: '查看视频',
@@ -161,29 +162,127 @@ const routes = [
 	    },
 	},
 	{
-	    path: '/pages/generateCopywriting/generateCopywriting',
+	    path: '/subPagesB/generateCopywriting/generateCopywriting',
 	    name: 'generateCopywriting',
 	    meta: {
 	        title: 'AI文案',
 	    },
 	},{
-	    path: '/pages/copywriting/copywriting',
+	    path: '/subPagesB/copywriting/copywriting',
 	    name: 'copywriting',
 	    meta: {
 	        title: '查看文案',
 	    },
 	},{
-	    path: '/pages/originalScript/originalScript',
+	    path: '/subPages/originalScript/originalScript',
 	    name: 'originalScript',
 	    meta: {
 	        title: '原创脚本',
 	    },
 	},
 	{
-	    path: '/pages/originalCopywriting/originalCopywriting',
+	    path: '/subPages/originalCopywriting/originalCopywriting',
 	    name: 'originalCopywriting',
 	    meta: {
 	        title: '原创文案',
+	    },
+	},
+	{
+	    path: '/pages/drafts/drafts',
+	    name: 'drafts',
+	    meta: {
+	        title: '仓库',
+	    },
+	},
+	{
+	    path: '/pages/user/user1',
+	    name: 'userlogin',
+	    meta: {
+	        title: '用户中心',
+	    },
+	},
+	{
+	    path: '/pages/firstpage/firstpage',
+	    name: 'firstpage',
+	    meta: {
+	        title: '首页',
+	    },
+	},
+	{
+	    path: '/subPagesB/new_generateScript/new_generateScript',
+	    name: 'new_generateScript',
+	    meta: {
+	        title: '脚本',
+	    },
+	},
+	{
+	    path: '/subPagesB/new_generateCopywriting/new_generateCopywriting',
+	    name: 'new_generateCopywriting',
+	    meta: {
+	        title: '文案',
+	    },
+	},
+	{
+	    path: '/subPagesB/new_scripts/new_scripts',
+	    name: 'new_scripts',
+	    meta: {
+	        title: '脚本编辑',
+	    },
+	},
+	{
+	    path: '/subPages/new_copywriting/new_copywriting',
+	    name: 'new_copywriting',
+	    meta: {
+	        title: '文案编辑',
+	    },
+	},
+	{
+	    path: '/subPages/new_shot/new_shot',
+	    name: 'new_shot',
+	    meta: {
+	        title: '视频导入',
+	    },
+	},
+	{
+	    path: '/subPages/new_video/new_video',
+	    name: 'new_video',
+	    meta: {
+	        title: '查看视频',
+	    },
+	},
+	{
+	    path: '/subPagesB/new_copywriting/new_copywriting',
+	    name: 'new_copywriting',
+	    meta: {
+	        title: '文案编辑',
+	    },
+	},
+	{
+	    path: '/subPages/new_photograph/new_photograph',
+	    name: 'new_photograph',
+	    meta: {
+	        title: '照片导入',
+	    },
+	},
+	{
+	    path: '/subPages/new_photo/new_photo',
+	    name: 'new_photo',
+	    meta: {
+	        title: '查看照片',
+	    },
+	},
+	{
+	    path: '/pages/user/new_user',
+	    name: 'new_user',
+	    meta: {
+	        title: '我的',
+	    },
+	},
+	{
+	    path: '/pages/works/works',
+	    name: 'works',
+	    meta: {
+	        title: '作品',
 	    },
 	},
 ]

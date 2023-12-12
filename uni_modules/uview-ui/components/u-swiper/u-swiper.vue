@@ -39,7 +39,7 @@
 			>
 				<view
 					class="u-swiper__wrapper__item__wrapper"
-					:style="[itemStyle(index)]"
+					:style="[itemStyle(index),ustyle]"
 				>
 					<!-- 在nvue中，image图片的宽度默认为屏幕宽度，需要通过flex:1撑开，另外必须设置高度才能显示图片 -->
 					<image

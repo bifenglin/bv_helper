@@ -1,7 +1,7 @@
 <template>
 	<view class="fui-textarea__wrap"
 		:class="{'fui-textarea__flex-start':flexStart,'fui-textarea__border-nvue':textareaBorder}"
-		:style="{paddingTop:padding[0] || 0,paddingRight:padding[1] || 0,paddingBottom:padding[2] || padding[0] || 0,paddingLeft:padding[3] || padding[1] || 0,background:backgroundColor,borderRadius:radius+'rpx',borderColor:borderColor,marginTop:marginTop+'rpx'}"
+		:style="{paddingTop:padding[0] || 0,paddingRight:padding[1] || 0,paddingBottom:padding[2] || padding[0] || 0,paddingLeft:padding[3] || padding[1] || 0,background:backgroundColor,letterSpacing: letterSpacing,borderRadius:radius+'rpx',borderColor:borderColor,marginTop:marginTop+'rpx'}"
 		@tap="fieldClick">
 		<view v-if="borderTop && !textareaBorder"
 			:style="{background:borderColor,left:topLeft+'rpx',right:topRight+'rpx'}" class="fui-textarea__border-top"
@@ -243,12 +243,16 @@
 				default: '#EEEEEE'
 			},
 			// #endif
-			// #ifndef APP-NVUE
+			
 			borderColor: {
 				type: String,
-				default: ''
+				default: '#EEEEEE'
 			},
-			// #endif
+			
+			letterSpacing: {
+				type: String,
+				default: '0'
+			},
 			radius: {
 				type: [String, Number],
 				default: 0
@@ -496,6 +500,7 @@
 		top: 50%;
 		transform: translateY(-50%);
 		line-height: 1.15;
+	
 		/* #endif */
 
 		/* #ifdef APP-NVUE */

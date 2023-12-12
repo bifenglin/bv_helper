@@ -1,9 +1,10 @@
 <template>
+	
 	<view>
-		<cu-custom bgColor="bg-gradual-blue" >
-			
-		</cu-custom>
-			<view style="margin: 2.2%; ">
+		<uni-nav-bar dark :fixed="true" shadow background-color="#00aaff" status-bar
+					 @clickLeft="back" />
+		</u-navbar>
+			<view style="margin: 3.2%; margin-bottom:4%;">
 				<view  style="background-color: #ffffff;">
 							<u-scroll-list>
 								<view class="scroll-list" style="flex-direction: row;">
@@ -13,12 +14,14 @@
 											:key="index"
 											:class="[(index === menuArr.length - 1) && 'scroll-list__line__item--no-margin-right']"
 										>
+											<view style="border: 2px solid #a1a1a1;padding:10rpx;border-radius: 20rpx;">
 											<image
 												class="scroll-list__line__item__image"
 												:src="icon_url + item.icon"
 												@tap="redirectToPage(item.page)"
 											>
 											</image>
+											</view>
 											<text class="scroll-list__line__item__text">{{ item.name }}</text>
 										</view>
 									</view>
@@ -26,16 +29,15 @@
 							</u-scroll-list>
 				</view>
 				
-			
-
-		<u-sticky>
-			 <u-tabs :list="list1" style="background-color: #ffffff; margin-top: 1%"   @tap="getType($event)" >
+		<u-sticky :offset-top="top">
+			<view style="background-color: white;margin-top: 10rpx; ">
+			 <u-tabs :list="list1"  @click="getType($event)" >
 			        <view
 			                slot="left"
-			                style="background-color: #ffffff; border-right: 1px solid #CCCCCC ;"
+			                style="background-color: white; border-right: 1px solid #CCCCCC ;"
 			                
 			        >
-			            <fui-dropdown-menu   selectedColor="#465CFF"  minWidth="200" :splitLine="true" lineColor="#465CFF" :isCheckbox="false" :options="list" @click="rangeItemClick" @close="rangeClose" ref="ddmRange">
+			            <fui-dropdown-menu selectedColor="#3c9cff"  minWidth="200" :splitLine="true" lineColor="#3c9cff" :isCheckbox="false" :options="list" @click="rangeItemClick" @close="rangeClose" ref="ddmRange">
 			            	<view class="fui-filter__item" @tap="filterTap">
 			            		<text>{{range}}</text>
 			            		<view class="fui-filter__icon" :class="{'fui-icon__ani':rangeShow}">
@@ -45,6 +47,7 @@
 			            </fui-dropdown-menu>
 			        </view>
 			    </u-tabs>
+			</view>
 		</u-sticky>
 		
 		<scroll-view >
@@ -54,16 +57,23 @@
 					<fui-col :span="12">
 						<view v-for="(item, index) in cards" :key="index" class="c_item">
 							<view v-if="index%2==0">
-						<uni-card :title="item.title" padding="10px 0"  :is-shadow="true" style="margin: 0%; border-radius: 15rpx;" @click="cardClick">
+						
+						<uni-card :title="item.title" padding="10px 0"  :is-shadow="true" margin="0" style="border-radius: 15rpx;"  @click="cardClick">
 							<image style="width: 100%;height: 300rpx;" :src="icon_url+item.image"></image>
 							<text class="uni-body uni-mt-5">{{item.text}}</text>
 							<view style="display: flex;flex-wrap: wrap;justify-content: flex-start">
 							<view v-for="(item1, index1) in item.tag" :key="index1" >
-								<u-tag :text="item1" plain borderColor="#a1a1a1" color="#a1a1a1" style="margin-top: 10rpx;margin-right: 10rpx;"></u-tag>
+								<view style="margin-top: 10rpx;margin-right: 10rpx;">
+								<u-tag :text="item1" plain borderColor="#a1a1a1" color="#a1a1a1" ></u-tag>
 							</view>
-							<u-tag :text="item.type" plain :borderColor="item.type =='脚本'?'#465CFF':'#00aa00'" :color="item.type == '脚本' ? '#465CFF':'#00aa00'" style="margin-top: 10rpx;margin-right: 10rpx;"></u-tag>
+							</view>
+							<view style="margin-top: 10rpx;margin-right: 10rpx;">
+							<u-tag :text="item.type" plain :borderColor="item.type =='脚本'?'#465CFF':'#00aa00'" :color="item.type == '脚本' ? '#465CFF':'#00aa00'" ></u-tag>
+							</view>
 							</view>
 						</uni-card>
+						
+						
 						</view>
 						</view>
 					</fui-col>
@@ -71,14 +81,18 @@
 				<fui-col :span="12" >
 					<view v-for="(item, index) in cards" :key="index" class="c_item">
 						<view v-if="index%2==1">
-					<uni-card :title="item.title" padding="10px 0"  :is-shadow="true" style="margin: 0%; border-radius: 15rpx;" @click="cardClick">
+					<uni-card :title="item.title" padding="10px 0"  :is-shadow="true" margin="0" style="border-radius: 15rpx;" @click="cardClick">
 						<image style="width: 100%;height: 300rpx;" :src="icon_url+item.image"></image>
 						<text class="uni-body uni-mt-5">{{item.text}}</text>
 						<view style="display: flex;flex-wrap: wrap;justify-content: flex-start">
 						<view v-for="(item1, index1) in item.tag" :key="index1" >
-							<u-tag :text="item1" plain borderColor="#a1a1a1" color="#a1a1a1" style="margin-top: 10rpx;margin-right: 10rpx;"></u-tag>
+							<view style="margin-top: 10rpx;margin-right: 10rpx;">
+							<u-tag :text="item1" plain borderColor="#a1a1a1" color="#a1a1a1" ></u-tag>
 						</view>
-						<u-tag :text="item.type" plain :borderColor="item.type =='脚本'?'#465CFF':'#00aa00'" :color="item.type == '脚本' ? '#465CFF':'#00aa00'"  style="margin-top: 10rpx;margin-right: 10rpx;"></u-tag>
+						</view>
+						<view style="margin-top: 10rpx;margin-right: 10rpx;">
+						<u-tag :text="item.type" plain :borderColor="item.type =='脚本'?'#465CFF':'#00aa00'" :color="item.type == '脚本' ? '#465CFF':'#00aa00'" ></u-tag>
+						</view>
 						</view>
 					</uni-card>
 					</view>
@@ -104,8 +118,8 @@
 			},
 		data() {
 			return {
-			
-			icon_url:"/static/homepage/",
+			top:0,	
+			icon_url:"../../static/homepage/",
 			list:[{
 			text: '综合推荐',
 			value: 1,
@@ -138,25 +152,25 @@
 			                }],
 			menuArr: [{
 							name: 'AI脚本',
-							icon: 'AI脚本.png',
-							page:'/pages/generate/generate'
+							icon: 'AIgenerate.png',
+							page:'/subPagesB/generate/generate'
 						},
 						{
 							name: 'AI文案',
-							icon: 'AI文案.png',
-							page:'/pages/generateCopywriting/generateCopywriting'
+							icon: 'AIgenerateCopywriting.png',
+							page:'/subPagesB/generateCopywriting/generateCopywriting'
 						}, {
 							name: '仓库',
-							icon: '草稿箱.png',
-							page:'/pages/generate/generate'
+							icon: 'drafts.png',
+							page:'/pages/drafts/drafts'
 						}, {
 							name: '原创脚本',
-							icon: '原创脚本.png',
-							page:'/pages/originalScript/originalScript'
+							icon: 'originalScript.png',
+							page:'/subPages/originalScript/originalScript'
 						}, {
 							name: '原创文案',
-							icon: '原创文案.png',
-							page:'/pages/originalCopywriting/originalCopywriting'
+							icon: 'originalCopywriting.png',
+							page:'/subPages/originalCopywriting/originalCopywriting'
 						}
 					],
 			cards:[
@@ -194,8 +208,24 @@
 			rangeShow: false,
 			}
 		},
+	
+		// #ifdef !H5
+		beforeMount() {
+			
+			 this.top =  44 + uni.getSystemInfoSync().statusBarHeight
+			 console.log(this.top)
+			
+		   
+		  },
+		  // #endif
 		methods: {
+			back() {
+							uni.navigateBack({
+								delta: 1
+							})
+						},
 			getType(e){
+				console.log(this.top)
 				console.log(e.index)
 				console.log(this.list1[e.index].name)
 			},
@@ -220,7 +250,7 @@
 				},
 			cardClick(){
 				uni.navigateTo({
-				        url: '/pages/scripts/scripts',
+				        url: '/subPagesB/scripts/scripts',
 				      });
 			}
 		}
@@ -228,6 +258,7 @@
 </script>
 
 <style lang="scss">
+	
 	.card_wrap {
 	      // 大盒子
 		  margin-top: 0.5%;
@@ -243,16 +274,11 @@
 	    }
 	.c_item {
 	      // 每个item
-	      
-	      
 	      margin: 4.5px 4.5px 2.5px 2.5px; // 间隙为5px
-	      
 	      width: calc(
 	        (100% - 10px)
 	      ); // 这里的10px = (分布个数2-1)*间隙5px, 可以根据实际的分布个数和间隙区调整
 	      min-width: calc((100% - 5px)); // 加入这两个后每个item的宽度就生效了
-	     
-	    
 	    }
 	
 	.fui-filter__item {
@@ -292,11 +318,9 @@
 			
 			text-align: center;
 			&__image {
-				width: 125rpx;
-				height: 125rpx;
-				border: 2px solid #a1a1a1;
-				padding:10rpx;
-				border-radius: 20rpx;
+				width: 65rpx;
+				height: 65rpx;
+				
 			}
 
 			&__text {
@@ -304,6 +328,7 @@
 				color: $u-content-color;
 				font-size: 20rpx;
 				font-weight:bold;
+				display:block;
 				
 			}
 

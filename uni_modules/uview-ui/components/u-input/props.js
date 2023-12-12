@@ -138,6 +138,10 @@ export default {
 			type: String,
 			default: uni.$u.props.input.color
 		},
+		backgroundColor: {
+			type: String,
+			default: "#ffffff"
+		},
 		// 输入框前置图标
 		prefixIcon: {
 			type: String,

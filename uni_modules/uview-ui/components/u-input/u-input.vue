@@ -197,6 +197,7 @@ export default {
         // 输入框的样式
         inputStyle() {
             const style = {
+				backgroundColor:this.backgroundColor,
                 color: this.color,
                 fontSize: uni.$u.addUnit(this.fontSize),
 				textAlign: this.inputAlign

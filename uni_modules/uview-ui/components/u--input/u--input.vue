@@ -26,6 +26,7 @@
 		:inputAlign="inputAlign"
 		:fontSize="fontSize"
 		:color="color"
+		:backgroundColor="backgroundColor"
 		:prefixIcon="prefixIcon"
 		:suffixIcon="suffixIcon"
 		:suffixIconStyle="suffixIconStyle"

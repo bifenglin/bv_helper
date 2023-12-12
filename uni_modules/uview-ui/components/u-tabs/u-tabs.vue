@@ -53,6 +53,7 @@
 									height: $u.addUnit(lineHeight),
 									background: lineColor,
 									backgroundSize: lineBgSize,
+									
 								}]"
 						>
 							<!-- #endif -->
@@ -67,6 +68,7 @@
 										height: $u.addUnit(lineHeight),
 										background: lineColor,
 										backgroundSize: lineBgSize,
+										
 									}]"
 							>
 								<!-- #endif -->
@@ -343,7 +345,7 @@
 					background: $u-primary;
 					width: 30px;
 					position: absolute;
-					bottom: 2px;
+					bottom: 0px;
 					border-radius: 100px;
 					transition-property: transform;
 					transition-duration: 300ms;

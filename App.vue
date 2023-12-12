@@ -2,10 +2,11 @@
 	import Vue from 'vue'
 	import appUpdate from 'common/util/appUpdate.js'
 	export default {
+		
 		onLaunch: function() {
+		
 			uni.getSystemInfo({
 				success: function(e) {
-					
 					// #ifdef APP-PLUS
 					// 检测升级
 					appUpdate()
@@ -30,6 +31,7 @@
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
 					// #endif
+
 					
 					// #ifdef APP-PLUS
 					//Vue.prototype.$api.listenTranMsg()
@@ -283,4 +285,7 @@
 			transform: translateY(0px);
 		}
 	}
+	 body {
+	    background-color: #ffffff;
+	  }
 </style>

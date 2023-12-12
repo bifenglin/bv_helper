@@ -1,5 +1,8 @@
 export default {
     props: {
+		uploadBackgroundColor:{
+			 type: String,
+		},
         // 接受的文件类型, 可选值为all media image file video
         accept: {
             type: String,

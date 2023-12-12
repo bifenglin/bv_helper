@@ -13,7 +13,8 @@ export default new Vuex.Store({
     username: '',
     realname: '',
     welcome: '',
-    avatar: ''
+    avatar: '',
+	globalToken: null
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -26,9 +27,16 @@ export default new Vuex.Store({
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
-    }
+    },
+	setGlobalToken(state, value) {
+	      state.globalToken = value;
+	    }
   },
   actions: {
+	updateMyVariable({ commit }, value) {
+	      // 在 action 中调用 mutation
+	      commit('setGlobalToken', value);
+	    },
     // 登录
     mLogin({ commit }, userInfo) {
       return new Promise((resolve, reject) => {

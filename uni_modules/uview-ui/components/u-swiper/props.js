@@ -1,5 +1,10 @@
 export default {
     props: {
+		//设置样式
+		ustyle:{
+			type: Object,
+			default: ""
+		},
         // 列表数组，元素可为字符串，如为对象可通过keyName指定目标属性名
         list: {
             type: Array,

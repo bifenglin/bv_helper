@@ -77,5 +77,8 @@
     "h5" : {
         "title" : "Do it today",
         "domain" : "myhjdc.cn"
+    },
+    "mp-alipay" : {
+        "appid" : "2021004124673026"
     }
 }

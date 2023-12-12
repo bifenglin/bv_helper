@@ -35,7 +35,7 @@
 		mixins: [uni.$u.mpMixin, uni.$u.mixin, props],
 		data() {
 			return {
-				cssSticky: false, // 是否使用css的sticky实现
+				cssSticky: true, // 是否使用css的sticky实现
 				stickyTop: 0, // 吸顶的top值，因为可能受自定义导航栏影响，最终的吸顶值非offsetTop值
 				elId: uni.$u.guid(),
 				left: 0, // js模式时，吸顶的内容因为处于postition: fixed模式，为了和原来保持一致的样式，需要记录并重新设置它的left，height，width属性

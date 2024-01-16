@@ -12,6 +12,7 @@
 		:safeAreaInsetBottom="false"
 		:duration="400"
 		@click="clickHandler"
+		zIndex="10075"
 	>
 		<view
 			class="u-modal"
@@ -21,6 +22,7 @@
 		>
 			<text
 				class="u-modal__title"
+				:style="titleStyle"
 				v-if="title"
 			>{{ title }}</text>
 			<view

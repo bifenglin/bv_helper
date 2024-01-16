@@ -28,7 +28,7 @@
 		<slot name="left"></slot>
 		<view class="fui-textarea__flex-1">
 			<textarea ref="fuiTextarea" class="fui-textarea__self" :class="{'fui-text__right':textRight}"
-				:style="{height:height,minHeight:minHeight,fontSize:size+'rpx',color:color}"
+				:style="{height:height,minHeight:minHeight,maxHeight:maxHeight,fontSize:size+'rpx',color:color}"
 				placeholder-class="fui-textarea-placeholder" :name="name" :value="val" :placeholder="placeholder"
 				:placeholderStyle="placeholderStyl" :disabled="disabled" :cursor-spacing="cursorSpacing"
 				:maxlength="maxlength" :focus="focused" :auto-height="autoHeight" :fixed="fixed"
@@ -186,6 +186,10 @@
 				type: String,
 				default: '30rpx'
 			},
+			maxHeight:{
+				type: String,
+			
+			},
 			//标题与输入框是否顶端对齐
 			flexStart: {
 				type: Boolean,
@@ -237,18 +241,11 @@
 				default: 0
 			},
 			//边框颜色
-			// #ifdef APP-NVUE
-			borderColor: {
-				type: String,
-				default: '#EEEEEE'
-			},
-			// #endif
 			
 			borderColor: {
 				type: String,
 				default: '#EEEEEE'
 			},
-			
 			letterSpacing: {
 				type: String,
 				default: '0'

@@ -148,7 +148,7 @@
 		transform: translateY(-50%);
 		/* #endif */
 		background-color: rgba(0, 0, 0, 0);
-		z-index: 1002;
+		z-index: 100076;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		visibility: hidden;

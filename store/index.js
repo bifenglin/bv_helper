@@ -14,7 +14,15 @@ export default new Vuex.Store({
     realname: '',
     welcome: '',
     avatar: '',
-	globalToken: null
+	globalToken: null,
+	user:{
+		flag:false,
+		nickName:null,
+		avatar:null,
+	
+	},
+	workNumber:null,
+	cards:null
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -29,13 +37,31 @@ export default new Vuex.Store({
       state.avatar = avatar
     },
 	setGlobalToken(state, value) {
-	      state.globalToken = value;
-	    }
+	    state.globalToken = value;
+	},
+	setUser(state,value){
+		state.user.flag=value.flag
+		state.user.nickName=value.nickName
+		state.user.avatar=value.avatar
+		
+	},
+	setWorkNumber(state,value){
+		
+		state.workNumber=value
+	},
+	setCards(state,value){
+		
+		state.cards=value
+	}
   },
   actions: {
 	updateMyVariable({ commit }, value) {
 	      // 在 action 中调用 mutation
 	      commit('setGlobalToken', value);
+	    },
+	updateUser({ commit }, value) {
+	      // 在 action 中调用 mutation
+	      commit('setUser', value);
 	    },
     // 登录
     mLogin({ commit }, userInfo) {

@@ -232,7 +232,7 @@
 
 	.u-popup {
 		flex: $u-popup-flex;
-
+		
 		&__content {
 			background-color: $u-popup-content-background-color;
 			position: relative;

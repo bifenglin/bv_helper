@@ -1,5 +1,8 @@
 export default {
     props: {
+		titleStyle:{
+			type: Object,
+		},
         // 是否展示modal
         show: {
             type: Boolean,

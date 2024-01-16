@@ -4,7 +4,7 @@
 					 @clickLeft="back" />
 		
 		<view class="view1">
-			<u-swiper :list="list" @change="e => current = e.current" imgMode="widthFix" bgColor="#ffffff"
+			<u-swiper :list="list" keyName="url" @change="e => current = e.current" imgMode="widthFix" bgColor="#ffffff"
 			:autoplay="false" height="872rpx" radius="8rpx" :ustyle="ustyle" class="view11">
 			    <view v-if="list.length<=5" slot="indicator" class="indicator">
 			        <view class="indicator__dot" v-for="(item, index) in list" :key="index"
@@ -35,39 +35,37 @@
 		</view>
 		<view class="view3">
 			<button class="button"  @click="buttonClick">
-				跳转发布
+				返回首页
 			</button>
 		</view>
 		<view class="view4">
 			<button class="button1"  @click="buttonClick1">
-				保存本地
+				一键复制
 			</button>
 			<button class="button2"  @click="buttonClick2">
 				存草稿
 			</button>
 		</view>
 		<view style="height: 1rpx;"></view>
+		<fui-toast ref="toast"></fui-toast>
 	</view>
 </template>
 
 <script>
+	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
+	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
+	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
+	import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue"
 	export default {
+		components:{
+			fuiIcon,fuiTextarea,fuiLoading,fuiToast
+		},
 		data() {
 			return {
 				current: 0,
-				text:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文',
-				list: [
-						'../../static/homepage/2.jpg',
-				        'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-				        'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-				        'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-						'../../static/homepage/2.jpg',
-						'../../static/homepage/2.jpg',
-						'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-						'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-						'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-						'../../static/homepage/2.jpg'
-				],
+				text:'',
+				list: [],
+				gptConversationId:null,
 				ustyle:{
 					display:'flex',
 					justifyContent: 'center',
@@ -76,11 +74,46 @@
 			}
 		},
 		methods: {
+			onLoad(){
+			    const eventChannel = this.getOpenerEventChannel()     
+			    eventChannel.on('photoData', data => {
+					console.log(data)
+					this.list=data.photoUrls
+					this.gptConversationId=data.conversationId
+					this.text=data.text
+					console.log(this.list)
+			    })
+			},
 			buttonClick(){
-				
+				uni.reLaunch({
+					url: '/pages/index/index'
+				});
 			},
 			buttonClick1(){
-				
+				// this.list.forEach((item, index) => {
+				// 	console.log(item)
+				// 	uni.saveImageToPhotosAlbum({
+				// 		filePath: item,
+				// 		success: function () {
+							
+				// 		},
+				// 		fail: (error) => {
+				// 			console.error('Error:', error);
+				// 			let options = {};
+				// 			options.text = '保存失败';
+				// 			this.$refs.toast.show(options);
+				// 		},
+				// 	});
+				// })
+				uni.setClipboardData({
+					data: this.text,
+					success: function () {
+						console.log('success');
+					}
+				});
+				let options = {};
+				options.text = '复制成功';
+				this.$refs.toast.show(options);
 			},
 			buttonClick2(){
 				
@@ -153,8 +186,9 @@
 		height: 152rpx;
 		margin-bottom: 44rpx; 
 		display: flex;
-		margin-top: 32rpx;
+		margin-top: 0rpx;
 		width: 100%;
+	
 	}
 	.view41{
 		position: fixed;
@@ -201,7 +235,7 @@
 		border-radius: 40rpx;
 		height: 80rpx;
 		width: 316rpx;
-		background-color: #106F6A;
+		background-color: #FFA000;
 		color:#ffffff;
 		font-size:34rpx;
 		display: flex;

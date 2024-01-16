@@ -3,23 +3,23 @@
 		<uni-nav-bar dark :fixed="true" shadow background-color="#ffffff" status-bar
 					 @clickLeft="back" />
 		
-		<view style="margin-bottom: 190rpx;">
-			<view class="view1">
+		<view style="margin-bottom: 220rpx;">
+			<view class="view1" :class="[itemsData.label.length == 0 && 'view1__active']">
 				<view class="v11">
 					<view v-if="titleTrue" class="view11" >
-						<u--text :lines="1" :text=originalData.title :bold="true"  size="32rpx" color="#000000" align="center" ></u--text>
+						<u--text :text=itemsData.title :bold="true"  size="32rpx" color="#000000" align="center" ></u--text>
 					</view>
 					<view v-else class="view11" style="width: 100%;">
 						  <u--input border="none" inputAlign="center" :focus="true" :autoBlur="false" 
-						    v-model="originalData.title" maxlength=-1 fontSize="32rpx" @blur="titleBlur" 
+						    v-model="itemsData.title" maxlength=-1 fontSize="32rpx" @blur="titleBlur" 
 							color="#000000" :customStyle="{'font-weight': 'bold'}"></u--input>
 					</view>
 					<view @click="title">
 						<image src="/static/icon/pencilb.png" class="view12"></image>
 					</view>
 				</view>
-				<view class="v12">
-					<view v-for="(item, index) in originalData.label" :key="index">
+				<view v-if="itemsData.label.length != 0" class="v12">
+					<view v-for="(item, index) in itemsData.label" :key="index">
 						<view class="v121" :style="{'border':'3rpx solid'+item.borderColor,'background-color':item.color}">
 								<text>{{'# '+item.title}}</text>
 						</view>
@@ -60,7 +60,7 @@
 							<u-col span="9.7">
 							    <view class="view232"  >
 									<view v-if="itemTitleTrue[index].description">
-										<u--text  :text="item.description" size="28rpx" align="center"></u--text>
+										<u--text  :text="item.description" size="28rpx" align="left"></u--text>
 									</view>
 									<view v-else>
 										<fui-textarea :fixed="true"  letterSpacing="1rpx"
@@ -92,7 +92,7 @@
 							<u-col span="9.7">
 							    <view class="view232" >
 							    	<view v-if="itemTitleTrue[index].narration">
-							    		<u--text  :text="item.narration" size="28rpx" align="center"></u--text>
+							    		<u--text  :text="item.narration" size="28rpx" align="left"></u--text>
 							    	</view>
 							    	<view v-else>
 							    		<fui-textarea :fixed="true"  letterSpacing="1rpx"
@@ -134,171 +134,178 @@
 				</view>	
 			</view>	
 			<view class="view3">
-				<button class="button"  @click="buttonClick">
+				<button class="button1"  @click="buttonClick1">
+					智能修改
+				</button>
+				<button class="button2"  @click="buttonClick2">
 					开始导入
 				</button>
 			</view>
 		</view>
 		<view style="height: 1rpx;"></view>
+		<fui-toast ref="toast"></fui-toast>
+		<view v-if="loadingValid">
+			<fui-loading type="col" text="生成中" maskBgColor="rgba(0, 0, 0, 0.6)" isMask :isFixed="true"></fui-loading>
+		</view>
+		<u-modal :show="show" title="智能修改" @cancel="cancel" @confirm="confirm" z-index="1000"
+		:title-style="{'color':'#11161A','font-size':'32rpx'}" style="max-height: 500rpx;" confirmColor="#543EE3" cancelColor="#11161A"
+		 show-cancel-button confirm-text="开始修改">
+		 <view style="width: 100%;">
+			<view class="view4">
+				<fui-textarea placeholder="请输入修改建议......" height="150rpx"
+				 maxlength=-1  v-model="advice" :padding="['0rpx', '0rpx',]" :focus="true"
+				 placeholderStyle="color:#A0A2A3;font-size: 32rpx" size="32"
+				 :borderTop="false" :borderBottom="false"></fui-textarea>
+			</view>
+			<view class="ss">
+				<view style="width: 302rpx;display: flex; align-items: center;">
+					<view style="font-size: 28rpx;">
+						<text>分镜数量</text>
+					</view>
+					<!-- <view style="font-size: 28rpx;color:#A0A2A3;">
+						<text> （选填）</text>
+					</view> -->
+				</view>
+				<view class="s">
+					<view class="s1" @click="minus">
+						<u-icon name="minus" color="#000000" size="14"></u-icon>	
+					</view>
+					<view class="s2">					
+						  <u--input
+						    placeholder="请输入数字"
+						    border="none"
+						    v-model="storyboardValue"
+							@change="inputVal"
+							inputAlign="center"
+							backgroundColor="#F2F3F5"						
+						  ></u--input>
+					</view>
+					<view class="s3" @click="plus">
+						<u-icon name="plus" color="#000000" size="14"></u-icon>
+					</view>
+				</view>
+			</view>
+		</view>
+		</u-modal>
 	</view>
 </template>
 
 <script>
+	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
 	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
+	import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue"
 	export default {
 		components:{
-			fuiIcon,fuiTextarea
+			fuiIcon,fuiTextarea,fuiToast,fuiLoading
 		},
 		// #ifdef MP-ALIPAY
 		onReady() {
-			
 			my.setNavigationBar({
 			  frontColor: '#000000',
 			  backgroundColor: '#ffffff',
 			})
-			
 		},
 		// #endif
 		data() {
 			return {
+				storyboardValue:null,
+				advice:"",
+				show: false,
 				titleTrue:true,
-				blvStyles:[{
-					backgroundColor: "#F6F6F6"
-				},
-				{
-					backgroundColor: "#F6F6F6"
-				},
-				{
-					backgroundColor: "#F6F6F6"
-				},],
-				itemTitleTrue:[
-					{
-						title:true,
-						description:true,
-						narration:true,
-					},
-					{
-						title:true,
-						description:true,
-						narration:true,
-					},
-					{
-						title:true,
-						description:true,
-						narration:true,
-					},
-				],
+				loadingValid:false,
+				blvStyles:[],
+				itemTitleTrue:[],
 				itemsData:{
-					title:"这是一个示例标题",
-					label:[
-						{
-							title:"打工暂停",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-						{
-							title:"标签",
-							color:"#C7FFD8",
-							borderColor:"#9CD2AD"
-						},{
-							title:"标签1",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-						{
-							title:"标签1",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-						{
-							title:"标签2",
-							color:"#C7FFD8",
-							borderColor:"#9CD2AD"
-						},{
-							title:"标签1",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-					],
-					items:[
-						{
-							title:'开场',
-							description:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							narration:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							note:'',
-						},
-						{
-							title:'中间',
-							description:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							narration:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							note:'',
-						},
-						{
-							title:'后面',
-							description:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							narration:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							note:'',
-						},
-					],
+					title:"",
+					label:[],		
+					items:[],
 				},
-				
 				originalData:{
-					title:"这是一个示例标题",
-					label:[
-						{
-							title:"打工暂停",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-						{
-							title:"标签",
-							color:"#C7FFD8",
-							borderColor:"#9CD2AD"
-						},{
-							title:"标签1",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-						{
-							title:"标签1",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-						{
-							title:"标签2",
-							color:"#C7FFD8",
-							borderColor:"#9CD2AD"
-						},{
-							title:"标签1",
-							color:"#F5E1FF",
-							borderColor:"#C6B3FE"
-						},
-					],
-					originalItems:[
-						{
-							title:'开场',
-							description:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							narration:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							note:'',
-						},
-						{
-							title:'中间',
-							description:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							narration:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							note:'',
-						},
-						{
-							title:'后面',
-							description:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							narration:'这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字这是一段示例文字',
-							note:'',
-						},
-					],
+					title:"",
+					label:[],		
+					originalItems:[],
 				},
+				globalToken:"",
+				gptConversationId:"",
+				message: "",
+				tags:[],
+				gptMessage:null,
+				content:null,
+				shotNumbers:null
 			}
 		},
 		methods: {
+			onLoad(){
+				this.globalToken=this.$store.state.globalToken
+			    const eventChannel = this.getOpenerEventChannel()     
+				let self = this;
+			    eventChannel.on('script', data => {
+					console.log(data)
+					self.gptMessage=data.result.gptMessage
+					self.gptConversationId=data.result.id
+					const jsonObject = JSON.parse(self.gptMessage.content);
+					self.content=jsonObject
+					self.originalData.title=jsonObject.title
+					self.originalData.label=data.tags
+					self.templateCode=data.templateCode
+					self.itemsData.title=jsonObject.title
+					self.itemsData.label=data.tags
+					self.storyboardValue=jsonObject.scenes.length
+					jsonObject.scenes.forEach(function(item) {
+						let it = {
+							title:'镜头'+item.shotNumber,
+							description:item.description,
+							narration:item.narration,
+							note:'',
+						}
+						let it3 = {
+							title:'镜头'+item.shotNumber,
+							description:item.description,
+							narration:item.narration,
+							note:'',
+						}
+						self.originalData.originalItems.push(it)
+						self.itemsData.items.push(it3)
+						let it1={
+							title:true,
+							description:true,
+							narration:true,
+						}
+						self.itemTitleTrue.push(it1)
+						let it2={
+							backgroundColor: "#F6F6F6"
+						}
+						self.blvStyles.push(it2)
+					});
+			    })
+			},
+			inputVal(e){
+				let temp = e.replace(/[^0-9]+/g,'')
+				this.$nextTick(()=>{
+					this.storyboardValue=temp
+				})
+			},
+			plus(){
+				if(this.storyboardValue==100){
+					let options = {};
+					options.text = '分镜数量最多为100';
+					this.$refs.toast.show(options);
+				}else{
+					this.storyboardValue++
+				}
+			},
+			minus(){
+				if(this.storyboardValue==1||this.storyboardValue==''){
+					let options = {};
+					// options.message = '分镜数量最少为1';
+					options.text = '分镜数量最少为1';
+					this.$refs.toast.show(options);
+					// this.$refs.uToast.show(options);
+				}else{
+					this.storyboardValue--
+				}
+			},
 			title(){
 				this.titleTrue=false
 			},
@@ -308,7 +315,6 @@
 			itemTitleModify(index){
 				this.itemTitleTrue[index].title=false
 				this.blvStylesOpen(index)
-				
 			},
 			itemTitleBlur(index){
 				this.itemTitleTrue[index].title=true
@@ -325,7 +331,8 @@
 				this.blvStylesOpen(index)
 			},
 			itemDescriptionRefresh(index){
-				this.itemsData.items[index].description=this.originalData.originalItems[index].description
+				this.itemsData.items[index].description= this.originalData.originalItems[index].description
+				
 			},
 			itemNarrationModify(index){
 				this.itemTitleTrue[index].narration=false
@@ -354,19 +361,153 @@
 			blvStylesClose(index){	
 				this.blvStyles[index].backgroundColor= "#F6F6F6"
 			},
-			buttonClick(){
+			buttonClick1(){
+				this.show = true;
+				this.advice=""
+			},
+			cancel(){
+				this.show = false;
+				this.advice=""
+			},
+			confirm(){
+				this.loadingValid=true
+				this.show = false
+				// #ifdef !H5
+				console.log("storyboardValue",this.storyboardValue)
+				uni.request({
+					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/message', 
+					method: 'POST',
+					data: {
+						message: this.advice,
+						gptConversationId:this.gptConversationId,
+						templateCode:this.templateCode,
+						shotNumbers:this.storyboardValue,
+						type:'jiaoben'
+					},
+					header: {
+					    'X-Access-Token': this.globalToken,
+					},
+					success: (res) => {
+					    console.log('messageResponse:', res.data);
+						this.loadingValid=false
+						if(res.data.code!=200||res.data.result.content=="抱歉，您的问题不太清楚，请提供更多细节或背景信息，我才能更好地回答您的问题。")
+						{
+							let options = {};
+							options.text = '抱歉，您的问题不太清楚，请提供更多细节或背景信息，我才能更好地回答您的问题。';
+							this.$refs.toast.show(options);
+						}else{
+							uni.navigateTo ({
+								url: '/subPagesB/new_scripts/new_scripts',
+								success: (re) => {
+									let scriptsData={
+										result:res.data.result,
+										templateCode:this.templateCode,
+										tags:this.originalData.label
+									}
+									re.eventChannel.emit('script', scriptsData)
+								}
+							});
+						}
+					},
+					fail: (error) => {
+						this.loadingValid=false
+						console.error('Error:', error);
+						let options = {};
+						options.text = '生成失败';
+						this.$refs.toast.show(options);
+					},
+				})
+				// #endif
+			},
+			buttonClick2(){
+				this.content.title=this.itemsData.title
+				for(let i =0;i<this.itemsData.items.length;i++){
+					this.content.scenes[i].description=this.itemsData.items[i].description
+					this.content.scenes[i].narration=this.itemsData.items[i].narration
+				}
+				this.gptMessage.content=this.content
+				
+				// #ifdef !H5
+				
+				uni.request({
+					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/edit/message', 
+					method: 'PUT',
+					data: {
+						gptMessage:this.gptMessage
+					},
+					header: {
+					    'X-Access-Token': this.globalToken,
+					},
+					success: (res) => {
+					    console.log('messageResponse:', res.data);
+						
+					},
+					fail: (error) => {
+						this.loadingValid=false
+						console.error('Error:', error);
+						let options = {};
+						options.text = '导入失败';
+						this.$refs.toast.show(options);
+					},
+				})
+				// #endif
 				uni.navigateTo({
 					url: '/subPages/new_shot/new_shot',
 					success: (res) => {
-							res.eventChannel.emit('script', this.itemsData)
-					    }
+						let scriptsData={
+							itemsData:this.itemsData,
+							gptConversationId:this.gptConversationId
+						}
+						res.eventChannel.emit('script', scriptsData)
+					}
 				});
 			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	.ss{
+		margin-top: 24rpx;
+		height: 84rpx;
+		border-radius: 8rpx;
+		display: flex;
+		align-items: center;
+		padding-left: 24rpx;
+		padding-right: 24rpx;
+	}
+	.s{
+		width: 320rpx;
+		margin-left: 32rpx;
+		height: 60rpx;
+		display: flex;
+		align-items: center;
+		background-color: #F2F3F5;
+	}
+	.s1{
+		display: flex;
+		justify-content: center; /* 水平居中 */
+		align-items: center; /* 垂直居中 */
+		height:100%;
+		width: 60rpx;
+		border-right:1px solid #E5E6EB;
+	}
+	.s2{
+		height:100%;
+		width: 200rpx;
+		display: flex;
+		justify-content: center; /* 水平居中 */
+		align-items: center; /* 垂直居中 */
+		background-color: #F2F3F5;
+	}
+	.s3{
+		display: flex;
+		justify-content: center; /* 水平居中 */
+		align-items: center; /* 垂直居中 */
+		height:100%;
+		width: 60rpx;
+		border-left:1px solid #E5E6EB;
+	}
 	.view1{
 		margin-top: 32rpx;
 		background-color: #ffffff;
@@ -375,6 +516,9 @@
 		margin-right: 3.2%;
 		padding-top: 24rpx;
 		box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+		&__active {
+			padding-bottom: 24rpx;
+		}
 	}
 	.view11{
 		display: flex;
@@ -382,6 +526,8 @@
 		align-items: center; /* 垂直居中 */
 		/* width: 100%; */
 		color: #000000;
+		margin-left: 72rpx;
+		max-width: 558rpx;
 		/* font-family: 'PingFang SC'; */
 	}
 	.v11{
@@ -390,6 +536,7 @@
 		align-items: center; /* 垂直居中 */
 		width: 100%;
 		height: 96rpx;
+	
 	}
 	.v12{
 		margin-top: 48rpx;
@@ -399,7 +546,6 @@
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		
 	}
 	.v121{
 		height: 56rpx;
@@ -452,13 +598,11 @@
 		border-radius: 8rpx 8rpx 0 0;
 	}
 	.view2111{
-		
 		display: flex;
 		justify-content: center; /* 水平居中 */
 		align-items: center; /* 垂直居中 */
 		width: 558rpx;
 		height:44rpx;
-		
 	}
 	.view2112{
 		width: 28rpx;
@@ -480,7 +624,6 @@
 		margin-left: 24rpx;
 	}
 	.view232{
-		
 		margin-top: 24rpx;
 		margin-left: 32rpx;
 		margin-right: 32rpx;
@@ -513,14 +656,43 @@
 		display: flex;
 		width: 100%;
 		justify-content: center; /* 水平居中 */
+		height: 152rpx;
+	}
+	.view4{
+		// width: 524rpx;
+		width: 100%;
+		margin-top: 10rpx;
+		border: 1rpx solid #A0A2A3;
+		padding: 5rpx;
+	}
+	.button1{
+		margin-top: 48rpx;
+		margin-left: 48rpx;
+		border-radius: 8rpx;
+		width: 306rpx;
+		background-color: #ffffff;
+		color:#A0A2A3;
+		font-size:34rpx;
+		border: 2rpx solid #A0A2A3;
+		height: 80rpx;
+		display: flex;
+		justify-content: center; /* 水平居中 */
 		align-items: center; /* 垂直居中 */
 	}
-	.button{
+	
+	.button2{
+		margin-top: 48rpx;
+		margin-left: 24rpx;
+		margin-right: 48rpx;
 		border-radius: 8rpx;
-		width: 654rpx;
+		width: 306rpx;
 		background-color: #543EE3;
 		color:#ffffff;
 		font-size:34rpx;
+		height: 80rpx;
+		display: flex;
+		justify-content: center; /* 水平居中 */
+		align-items: center; /* 垂直居中 */
 	}
 </style>
 

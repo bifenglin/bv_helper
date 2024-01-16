@@ -7,9 +7,11 @@
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
+        "runmode" : "liberate",
         "modules" : {
             "Maps" : {},
-            "Push" : {}
+            "Push" : {},
+            "VideoPlayer" : {}
         },
         /* 模块配置 */
         "distribute" : {
@@ -79,6 +81,8 @@
         "domain" : "myhjdc.cn"
     },
     "mp-alipay" : {
-        "appid" : "2021004124673026"
+        "appid" : "2021004124673026",
+		"lazyCodeLoading" : "requiredComponents",
+		"subPackageBuildType": "shared"
     }
 }

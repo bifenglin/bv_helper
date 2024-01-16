@@ -285,5 +285,19 @@ const routes = [
 	        title: '作品',
 	    },
 	},
+	{
+	    path: '/pages/community/community',
+	    name: 'community',
+	    meta: {
+	        title: '学习社区',
+	    },
+	},
+	{
+	    path: '/subPages/clip/clip',
+	    name: 'clip',
+	    meta: {
+	        title: '视频剪辑',
+	    },
+	},
 ]
 export default routes

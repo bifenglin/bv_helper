@@ -107,6 +107,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
 	import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue"
@@ -251,7 +252,7 @@
 					let fileName ='produce/'+this.gptConversationId+'/'+index+'.jpg'
 					let host='https://yanbi-resources.oss-cn-shanghai.aliyuncs.com'
 					uni.request({
-						url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/oss/sts/get', //请求后台签名地址。
+						url: configService.apiUrl+'/sys/oss/sts/get', //请求后台签名地址。
 						method: 'GET',
 						data: { // 请求参数，如果是 GET 请求，可以将参数拼接到 URL 后面
 							durationSeconds: 2000,

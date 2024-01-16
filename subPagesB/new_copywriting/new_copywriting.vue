@@ -146,6 +146,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
 	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
@@ -375,7 +376,7 @@
 				this.show = false
 				// #ifdef !H5
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/text/conversation/message', 
+					url: configService.apiUrl+'/text/conversation/message', 
 					method: 'POST',
 					data: {
 						message: this.advice,

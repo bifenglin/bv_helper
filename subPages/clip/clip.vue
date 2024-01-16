@@ -86,6 +86,7 @@
 	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
 	import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue"
+	import configService from'@/common/service/config.service.js'
 	const innerAudioContext = uni.createInnerAudioContext();
 	export default {
 		components:{
@@ -123,7 +124,7 @@
 					console.log(this.gptConversationId)
 			    })
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptMusic/scene', 
+					url: configService.apiUrl+'/gpt/gptMusic/scene', 
 					method: 'GET',
 					header: {
 					    'X-Access-Token': this.globalToken,
@@ -147,7 +148,7 @@
 					},
 				});
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptMusic/list', 
+					url: configService.apiUrl+'/gpt/gptMusic/list', 
 					method: 'GET',
 					data: {
 						scene:this.scene,
@@ -200,7 +201,7 @@
 				console.log(this.listq[e.index].name)
 				this.scene=this.listq[e.index].name
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptMusic/list', 
+					url: configService.apiUrl+'/gpt/gptMusic/list', 
 					method: 'GET',
 					data: {
 						scene:this.listq[e.index].name,
@@ -238,7 +239,7 @@
 			},
 			returnModify(){
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/getConversationById', 
+					url: configService.apiUrl+'/video/conversation/getConversationById', 
 					method: 'GET',
 					data: {
 						id:this.gptConversationId
@@ -248,7 +249,7 @@
 					},
 					success: (res) => {
 						uni.request({
-							url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/getMessageByConversationId', 
+							url: configService.apiUrl+'/video/conversation/getMessageByConversationId', 
 							method: 'GET',
 							data: {
 								id:this.gptConversationId
@@ -348,7 +349,7 @@
 			buttonClick(){
 				this.loadingValid=true
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptVideoConfig/add', 
+					url: configService.apiUrl+'/gpt/gptVideoConfig/add', 
 					method: 'POST',
 					data: {
 						bgmScene:this.scene,
@@ -363,7 +364,7 @@
 						console.log('sceneResponse:', res.data);
 					    console.log('sceneResponse:', res.data.code);
 						uni.request({
-							url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptMedia/generate', 
+							url: configService.apiUrl+'/gpt/gptMedia/generate', 
 							method: 'GET',
 							data: {
 								conversationId: this.gptConversationId,
@@ -408,7 +409,7 @@
 			sendRequest(){
 				console.log("lllllll")
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/getConversationById', 
+					url: configService.apiUrl+'/video/conversation/getConversationById', 
 					method: 'GET',
 					data: {
 						id: this.gptConversationId,

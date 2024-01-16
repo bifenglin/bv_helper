@@ -41,6 +41,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
 	export default {
 		name: "firstpage",
@@ -98,7 +99,7 @@
 				                console.log('支付宝授权凭证',auth)	
 								
 								uni.request({
-									url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/thirdLogin/ALIPAY', 
+									url: configService.apiUrl+'/sys/thirdLogin/ALIPAY', 
 									method: 'GET',
 									data: { // 请求参数，如果是 GET 请求，可以将参数拼接到 URL 后面
 										authCode: auth.authCode,
@@ -109,7 +110,7 @@
 										self.$store.dispatch('updateMyVariable', res.data.result.token);
 										self.globalToken=res.data.result.token
 										uni.request({
-											url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/list', 
+											url: configService.apiUrl+'/video/conversation/list', 
 											method: 'GET',
 											header: {
 											    'X-Access-Token':self.globalToken,
@@ -117,7 +118,7 @@
 											success: (r) => {
 												let number = r.data.result.total
 												uni.request({
-													url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/text/conversation/list', 
+													url: configService.apiUrl+'/text/conversation/list', 
 													method: 'GET',
 													header: {
 													    'X-Access-Token': self.globalToken,

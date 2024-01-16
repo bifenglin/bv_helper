@@ -147,6 +147,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiDropdownMenu from "@/components/firstui/fui-dropdown-menu/fui-dropdown-menu.vue"
 	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
@@ -168,7 +169,7 @@
 		onLoad:function(){
 		  	this.globalToken=this.$store.state.globalToken
 			uni.request({
-				url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot//sys/category/childList', 
+				url: configService.apiUrl+'/sys/category/childList', 
 				method: 'GET',
 				data: {
 					pid:'1737803121890844673',
@@ -197,7 +198,7 @@
 				},
 			});
 			uni.request({
-				url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/api/queryDictItemsByCode', 
+				url: configService.apiUrl+'/sys/api/queryDictItemsByCode', 
 				method: 'GET',
 				data: {
 					code:'character_role',
@@ -233,7 +234,7 @@
 				},
 			});
 			uni.request({
-				url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/api/queryDictItemsByCode', 
+				url: configService.apiUrl+'/sys/api/queryDictItemsByCode', 
 				method: 'GET',
 				data: {
 					code:'tone',
@@ -477,7 +478,7 @@
 				
 				// #ifdef !H5
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/text/conversation/add', 
+					url: configService.apiUrl+'/text/conversation/add', 
 					method: 'POST',
 					data: {
 						message: this.textarea,

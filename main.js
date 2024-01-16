@@ -25,7 +25,8 @@ Vue.prototype.$store=store;
 Vue.prototype.$tip=tip;
 // config
 Vue.prototype.$config=configService;
-
+// url
+// Vue.prototype.$baseUrl = '';
 // request请求
 import { http } from '@/common/service/service.js' 
 Vue.prototype.$http = http

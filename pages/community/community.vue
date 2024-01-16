@@ -77,6 +77,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	export default {
 		name: "community",
 		data() {

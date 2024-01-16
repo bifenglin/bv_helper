@@ -132,6 +132,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
 	export default {

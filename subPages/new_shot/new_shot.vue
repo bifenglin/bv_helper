@@ -112,6 +112,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
 	import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
@@ -168,7 +169,7 @@
 					if(this.fileList[i].length != 0){
 						console.log("112211:",JSON.stringify(this.fileList[i][0].url))
 						uni.request({
-							url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptMedia/add', 
+							url: configService.apiUrl+'/gpt/gptMedia/add', 
 							method: 'POST',
 							data: {
 								conversationId: this.gptConversationId,
@@ -205,7 +206,7 @@
 				}
 				if(a){
 					uni.request({
-						url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptVideoConfig/add', 
+						url: configService.apiUrl+'/gpt/gptVideoConfig/add', 
 						method: 'POST',
 						data: {
 							bgmScene:'情绪场景',
@@ -220,7 +221,7 @@
 							console.log('sceneResponse:', res.data);
 						    console.log('sceneResponse:', res.data.code);
 							uni.request({
-								url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/gpt/gptMedia/generate', 
+								url: configService.apiUrl+'/gpt/gptMedia/generate', 
 								method: 'GET',
 								data: {
 									conversationId: this.gptConversationId,
@@ -294,7 +295,7 @@
 			sendRequest(){
 				console.log("lllllll")
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/getConversationById', 
+					url: configService.apiUrl+'/video/conversation/getConversationById', 
 					method: 'GET',
 					data: {
 						id: this.gptConversationId,
@@ -411,7 +412,7 @@
 					let fileName ='produce/'+this.gptConversationId+'/'+index+'.mp4'
 					let host='https://yanbi-resources.oss-cn-shanghai.aliyuncs.com'
 					uni.request({
-						url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/oss/sts/get', //请求后台签名地址。
+						url: configService.apiUrl+'/sys/oss/sts/get', //请求后台签名地址。
 						method: 'GET',
 						data: { // 请求参数，如果是 GET 请求，可以将参数拼接到 URL 后面
 							durationSeconds: 2000,

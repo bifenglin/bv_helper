@@ -208,6 +208,7 @@
 </template>
 
 <script>
+	import configService from'@/common/service/config.service.js'
 	import fuiDropdownMenu from "@/components/firstui/fui-dropdown-menu/fui-dropdown-menu.vue"
 	import fuiToast from "@/components/firstui/fui-toast/fui-toast.vue"
 	import fuiTextarea from "@/components/firstui/fui-textarea/fui-textarea.vue"
@@ -287,7 +288,7 @@
 					this.ts='推荐地区'
 					this.locationValid=true
 					uni.request({
-						url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/resource/resourceAttraction/city', 
+						url: configService.apiUrl+'/resource/resourceAttraction/city', 
 						method: 'GET',
 						header: {
 						    'X-Access-Token': this.globalToken,
@@ -311,7 +312,7 @@
 							this.columns.push(this.picker1)
 							this.columns.push(this.columnData[0])
 							uni.request({
-								url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/resource/resourceAttraction/attraction', 
+								url: configService.apiUrl+'/resource/resourceAttraction/attraction', 
 								method: 'GET',
 								data: {
 									city:this.columnData[0][0],
@@ -343,7 +344,7 @@
 					this.ts='推荐特产'
 					this.locationValid=true
 					uni.request({
-						url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/resource/resourceSpecialty/city', 
+						url: configService.apiUrl+'/resource/resourceSpecialty/city', 
 						method: 'GET',
 						header: {
 						    'X-Access-Token': this.globalToken,
@@ -364,7 +365,7 @@
 							this.specialtyColumns.push(this.picker2)
 							this.specialtyColumns.push(this.columnData1[0])
 							uni.request({
-								url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/resource/resourceSpecialty/specialty', 
+								url: configService.apiUrl+'/resource/resourceSpecialty/specialty', 
 								method: 'GET',
 								data: {
 									city:this.columnData1[0][0],
@@ -405,7 +406,7 @@
 		onLoad:function(){
 		  	this.globalToken=this.$store.state.globalToken
 			uni.request({
-				url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot//sys/category/childList', 
+				url: configService.apiUrl+'/sys/category/childList', 
 				method: 'GET',
 				data: {
 					pid:'1734210306342555649',
@@ -432,7 +433,7 @@
 				},
 			});
 			uni.request({
-				url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/api/queryDictItemsByCode', 
+				url: configService.apiUrl+'/sys/api/queryDictItemsByCode', 
 				method: 'GET',
 				data: {
 					code:'character_role',
@@ -468,7 +469,7 @@
 				},
 			});
 			uni.request({
-				url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/sys/api/queryDictItemsByCode', 
+				url: configService.apiUrl+'/sys/api/queryDictItemsByCode', 
 				method: 'GET',
 				data: {
 					code:'tone',
@@ -613,7 +614,7 @@
 			},
 			getCity(c,picker){
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/resource/resourceAttraction/attraction', 
+					url: configService.apiUrl+'/resource/resourceAttraction/attraction', 
 					method: 'GET',
 					data: {
 						city:c,
@@ -634,7 +635,7 @@
 			},
 			getCity1(c,picker){
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/resource/resourceSpecialty/specialty', 
+					url: configService.apiUrl+'/resource/resourceSpecialty/specialty', 
 					method: 'GET',
 					data: {
 						city:c,
@@ -766,7 +767,7 @@
 				console.log("labels.join(',')",labels.join(','))
 				// #ifdef !H5
 				uni.request({
-					url: 'https://bvhp-server-37674f03-cd6a-47a1-aece-51f000c331d8.dev-hz.cloudbaseapp-sandbox.cn/jeecg-boot/video/conversation/add', 
+					url: configService.apiUrl+'/video/conversation/add', 
 					method: 'POST',
 					data: {
 						message: this.textarea,
